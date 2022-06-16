@@ -2,7 +2,7 @@ CC|=clang
 CFLAGS+=-std=gnu99 -Wall
 LDFLAGS+=-luv
 
-src/main: src/main.c src/nar.o  
+src/main: src/main.c src/nar.o src/soll.o
 	${CC} $^ -o $@ ${CFLAGS} ${LDFLAGS}
 
 clean:
