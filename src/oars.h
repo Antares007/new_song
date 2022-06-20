@@ -1,24 +1,25 @@
 #pragma once
 /*                       Notandor / არადანი
-                                  .
+                                   
                init               .           next
         .................................................
-            σ[α] M  σ[ρ]          .            M
-              ↓  M    ↓           .            M
-        σ→NNNn○○○○○○○○ǑǍŇ         .            M
+           σ[α]  M  ο[ρ]          .            M
+             ↓   M    ↓           .            M
+        σ→NNN○○○ ο→○○○OAN         .            M
                  M                .            M
-                 ο                .            ο
-                 M                .   σ→NNN○○○○○OANnǑǍŇ
-                 M                .        ↑   M↑
-                 M                .      σ[α]  M σ[ρ]
-                                  .
-            ο[2] = არა/Not | ο[1] = და/And | ο[0] = ან/Or
+                 M                .            M
+                 M                .   σ→NNN○○○ ο→○○○OAN
+                 M                .        ↑   M    ↑
+                 M                .      σ[α]  M  ο[ρ]
+                                   
+        ο[ρ+2] = არა/Not | ο[ρ+1] = და/And | ο[ρ+0] = ან/Or
 
   The protocol of "Notandor/არადანი" gives us the power to specify
   everything in the M-words. We need to do so because the M-words
   are the only language we have from the beginning within the CPU.
   We need to start to specify things using language and not data
   structures. */
+
 // clang-format off
 #include <stdint.h>
 typedef  int8_t  b_t; typedef  int16_t w_t; typedef  int32_t d_t; typedef  int64_t q_t;
@@ -39,7 +40,7 @@ typedef void (*n_t)(OARS);
 #define N(n)    void n(OARS)
 #define A(vs)   σ[α++].v = (void *)(vs),
 #define R(T, n) T n = (T)σ[--α].v
-#define G(r)    σ[ρ + (r)].c(T())
+#define G(r)    ο[ρ + (r)].c(T())
 #define O       σ[α - 1].c(ο, α - 1, ρ, σ)
 
 #define S(n)    static N(n)
