@@ -1,18 +1,14 @@
 #pragma once
 /*                       Notandor / არადანი
-                                   
-               init               .           next
-        .................................................
-           σ[α]  M  ο[ρ]          .            M
-             ↓   M    ↓           .            M
-        σ→NNN○○○ ο→○○○OAN         .            M
-                 M                .            M
-                 M                .            M
-                 M                .   σ→NNN○○○ ο→○○○OAN
-                 M                .        ↑   M    ↑
-                 M                .      σ[α]  M  ο[ρ]
-                                   
-        ο[ρ+2] = არა/Not | ο[ρ+1] = და/And | ο[ρ+0] = ან/Or
+                                  o       
+                            m           b
+                              .   |   .
+                                . | .
+                          s ------------ t
+                                . | .
+                              .   |   .
+                            n     |     v
+                                  a       
 
   The protocol of "Notandor/არადანი" gives us the power to specify
   everything in the M-words. We need to do so because the M-words
@@ -27,24 +23,29 @@ typedef uint8_t  B_t; typedef uint16_t W_t; typedef uint32_t D_t; typedef uint64
 typedef struct p_t {
   union {
     struct p_t *p;
-    void (*c)(struct p_t *ο, Q_t α, Q_t ρ, struct p_t *σ);
+    void (*c)(
+      struct p_t *o, Q_t a,
+      struct p_t *s, Q_t t,
+      struct p_t *m, Q_t v,
+      struct p_t *n, Q_t b
+    );
     void *v;
     const char *cs;
     b_t b; w_t w; d_t d; q_t q;
     B_t B; W_t W; D_t D; Q_t Q;
   };
 } p_t;
-#define OARS  p_t *ο, Q_t α, Q_t ρ, p_t *σ 
+
+#define OARS p_t *o, Q_t a, p_t *s, Q_t t, p_t *m, Q_t v, p_t *n, Q_t b
+
 typedef void (*n_t)(OARS);
 
 #define N(n)    void n(OARS)
-#define A(vs)   σ[α++].v = (void *)(vs),
-#define R(T, n) T n = (T)σ[--α].v
-#define G(r)    ο[ρ + (r)].c(T())
-#define O       σ[α - 1].c(ο, α - 1, ρ, σ)
+#define A(vs)   o[a++].v = (void *)(vs),
+#define R(T, n) T n = (T)o[--a].v
+#define G(r)    s[t + (r)].c(o,   a, s, t, m, v, n, b)
+#define O       o[a -   1].c(o, a-1, s, t, m, v, n, b)
 
-#define S(n)    static N(n)
-#define T(n)    n##ο, n##α, n##ρ, n##σ 
 #define C(r)    G(r)
 
 #define ALIGN(O, A) ((Q_t)(((O) + ((A) - 1)) / (A))) * (A)

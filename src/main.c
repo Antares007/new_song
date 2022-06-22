@@ -9,6 +9,8 @@ N(ray_oor ) { printf("OOR %lu\n", α); }
 
 
 N(nar);
+//  დღეს
+//    
 int main() {
   p_t ο[512];
   Q_t α = 0;
@@ -19,5 +21,6 @@ int main() {
   ο[--ρ].c = ray_oor;
 
   Α(one, one, 010, nar, add,  010, nar) O;
+  Α(one) O;
   return 0;
 }
