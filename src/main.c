@@ -1,8 +1,8 @@
 #include "oars.h"
 #include <stdio.h>
 
-N(one     ) { Α(7) C(1); }
-N(add     ) { R(Q_t, r); R(Q_t, l); Α(l+r) C(1); }
+N(one     ) { o[a++].Q = 1, C(1); } 
+N(add     ) { R(Q_t, r); R(Q_t, l); o[a++].Q = l+r, C(1); }
 N(ray_not ) { printf("NOT\n"); }
 N(ray_and ) { printf("AND\n"); }
 N(ray_oor ) { printf("OOR\n"); }

@@ -4,7 +4,7 @@
                             m           b
                               .   |   .
                                 . | .
-                          s ------------ t
+                           s ----------- t
                                 . | .
                               .   |   .
                             n     |     v
@@ -15,7 +15,6 @@
   are the only language we have from the beginning within the CPU.
   We need to start to specify things using language and not data
   structures. */
-
 // clang-format off
 #include <stdint.h>
 typedef  int8_t  b_t; typedef  int16_t w_t; typedef  int32_t d_t; typedef  int64_t q_t;
@@ -35,22 +34,16 @@ typedef struct p_t {
     B_t B; W_t W; D_t D; Q_t Q;
   };
 } p_t;
-
 #define OARS p_t *o, Q_t a, p_t *s, Q_t t, p_t *m, Q_t v, p_t *n, Q_t b
-
 typedef void (*n_t)(OARS);
-
 #define N(n)    void n(OARS)
 #define A(vs)   o[a++].v = (void *)(vs),
 #define R(T, n) T n = (T)o[--a].v
 #define G(r)    s[t + (r)].c(o,   a, s, t, m, v, n, b)
 #define O       o[a -   1].c(o, a-1, s, t, m, v, n, b)
-
 #define C(r)    G(r)
-
 #define ALIGN(O, A) ((Q_t)(((O) + ((A) - 1)) / (A))) * (A)
 #define wordCountOf(T) ALIGN(sizeof(T), sizeof(void*))
-
 #define CAT_(a, b) a##b
 #define CAT(a, b) CAT_(a, b)
 #include "oars_as.h"
