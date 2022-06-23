@@ -1,3 +1,4 @@
 #pragma once
 #include "evalmap.h"
-#define Α(...) EVAL(MAP(A, __VA_ARGS__))
+#define OA(...) EVAL(MAP(Oa, __VA_ARGS__))
+#define NA(...) EVAL(MAP(Na, __VA_ARGS__))
