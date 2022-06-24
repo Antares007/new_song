@@ -36,16 +36,14 @@ typedef struct p_t {
 } p_t;
 #define OARS p_t *o, Q_t a, p_t *s, Q_t t, p_t *m, Q_t v, p_t *n, Q_t b
 typedef void (*n_t)(OARS);
-#define N(n)      void n(OARS)
-#define Oa(vs)    o[a++].v = (void *)(vs),
-#define Na(vs)    n[b++].v = (void *)(vs),
-#define Ro(T, nm) T nm = (T)o[--a].v
-#define Rn(T, nm) T nm = (T)n[--b].v
-#define G(r)      s[t + (r)].c(o,   a, s, t, m, v, n, b)
-#define O         o[a -   1].c(o, a-1, s, t, m, v, n, b)
-#define C(r)      G(r)
-#define ALIGN(O, A) ((Q_t)(((O) + ((A) - 1)) / (A))) * (A)
-#define wordCountOf(T) ALIGN(sizeof(T), sizeof(void*))
-#define CAT_(a, b) a##b
-#define CAT(a, b) CAT_(a, b)
+#define N(n)            void n(OARS)
+#define Α(vs)           o[a++].v = (void *)(vs),
+#define R(T, nm)        T nm = (T)o[--a].v
+#define G(r)            s[t + (r)].c(o,   a, s, t, m, v, n, b)
+#define O               o[a -   1].c(o, a-1, s, t, m, v, n, b)
+#define C(r)            G(r)
+#define ALIGN(O, A)     ((Q_t)(((O) + ((A) - 1)) / (A))) * (A)
+#define wordCountOf(T)  ALIGN(sizeof(T), sizeof(void*))
+#define CAT_(a, b)      a##b
+#define CAT(a, b)       CAT_(a, b)
 #include "oars_as.h"
