@@ -40,9 +40,9 @@ typedef void (*n_t)(OARS);
 #define Α(vs)           o[a++].v = (void *)(vs),
 #define Β(vs)           m[v++].v = (void *)(vs),
 #define R(T, nm)        T nm = (T)o[--a].v
-#define G(r)            s[t + (r)].c(o,   a, s, t, m, v, n, b)
+#define C(r)            s[t + (r)].c(o,   a, s, t, m, v, n, b)
 #define O               o[a -   1].c(o, a-1, s, t, m, v, n, b)
-#define C(r)            G(r)
+#define X               o, a, s, t, m, v, n, b
 #define ALIGN(O, A)     ((Q_t)(((O) + ((A) - 1)) / (A))) * (A)
 #define wordCountOf(T)  ALIGN(sizeof(T), sizeof(void*))
 #define CAT_(a, b)      a##b

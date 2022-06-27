@@ -1,17 +1,26 @@
 #include "oars.h"
 #include <stdio.h>
 
+N(nar);
+N(and ) { A(010) nar(X); }
+N(and2) { A(020) nar(X); }
+N(and3) { A(030) nar(X); }
+N(and4) { A(040) nar(X); }
+
 N(one) { printf("one\n"); A(1) C(1); }
+N(two) { printf("two\n"); A(2) C(1); }
 N(add) {
   R(Q_t, r);
   R(Q_t, l);
   o[a++].Q = l + r, C(1);
 }
-N(ray_not) { printf("NOT\n"); }
-N(ray_and) { printf("AND\n"); }
-N(ray_oor) { printf("OOR\n"); }
+N(o_ray_not) { printf("O NOT\n"); }
+N(o_ray_and) { printf("O AND\n"); }
+N(o_ray_oor) { printf("O OOR\n"); }
+N(n_ray_not) { printf("N NOT\n"); }
+N(n_ray_and) { printf("N AND\n"); }
+N(n_ray_oor) { printf("N OOR\n"); }
 
-N(nar);
 
 N(tick) {
   p_t*o_; Q_t a_;
@@ -22,23 +31,15 @@ N(tick) {
   s_ = s; s = n; n = s_;
   t_ = t; t = b; b = t_;
 
-  C(1);
+  O;
 }
-N(iam) { A(one) B(one) O; }
+N(iam) { A(one, tick, and) B(two) O; }
 
-N(S) {
-  //A("b", term) 
-  //A(S, "b", term) B(1) C(1);
+N(S) { //A("b", term) A(S, "b", term) B(1) C(1);
 }
-N(back) {
-  A(1) C(1);
-}
-N(example ) {
-  A(iam) O;
-}
-// დღეს
-// Act as if ye have faith and faith shall be given to you.
-// Put it another way: fake it 'til you make it
+N(back) { A(1) C(1); }
+N(example ) { A(iam) O; }
+
 // clang-format off
 int main( ) {
   p_t o[61]; Q_t a = 0;
@@ -46,9 +47,9 @@ int main( ) {
   p_t m[63]; Q_t v = 0;
   p_t n[64]; Q_t b = sizeof(n) / sizeof(*n);
 
-  s[--t].c = ray_not, s[--t].c = ray_and, s[--t].c = ray_oor;
+  s[--t].c = o_ray_not, s[--t].c = o_ray_and, s[--t].c = o_ray_oor;
+  n[--b].c = n_ray_not, n[--b].c = n_ray_and, n[--b].c = n_ray_oor;
 
-  A(one, one, 010, nar, add, 010, nar) O;
-  //A(example) O;
+  A(example) O;
   return 0;
 }
