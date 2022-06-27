@@ -1,7 +1,7 @@
 #include "oars.h"
 #include <stdio.h>
 
-N(one) { A(1) C(1); }
+N(one) { printf("one\n"); A(1) C(1); }
 N(add) {
   R(Q_t, r);
   R(Q_t, l);
@@ -24,8 +24,17 @@ N(tick) {
 
   C(1);
 }
-N(example ) {
+N(iam) { A(one) B(one) O; }
+
+N(S) {
+  //A("b", term) 
+  //A(S, "b", term) B(1) C(1);
+}
+N(back) {
   A(1) C(1);
+}
+N(example ) {
+  A(iam) O;
 }
 // დღეს
 // Act as if ye have faith and faith shall be given to you.
@@ -39,7 +48,7 @@ int main( ) {
 
   s[--t].c = ray_not, s[--t].c = ray_and, s[--t].c = ray_oor;
 
-  // Α(one, one, 010, nar, add, 010, nar) O;
-  A(example) O;
+  A(one, one, 010, nar, add, 010, nar) O;
+  //A(example) O;
   return 0;
 }
