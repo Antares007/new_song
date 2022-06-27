@@ -6,37 +6,48 @@ N(and ) { A(010) nar(X); }
 N(and2) { A(020) nar(X); }
 N(and3) { A(030) nar(X); }
 N(and4) { A(040) nar(X); }
-
-N(one) { printf("one\n"); A(1) C(1); }
-N(two) { printf("two\n"); A(2) C(1); }
+N(two);
+N(one) { printf("one\n"); A(1) B(two) C(1); }
+N(two) { printf("two\n"); A(2) B(one) C(1); }
 N(add) {
   R(Q_t, r);
   R(Q_t, l);
   o[a++].Q = l + r, C(1);
 }
+N(tick);
 N(o_ray_not) { printf("O NOT\n"); }
-N(o_ray_and) { printf("O AND\n"); }
+N(o_ray_and) { printf("O AND %lu\n", v); if(v) tick(X); }
 N(o_ray_oor) { printf("O OOR\n"); }
 N(n_ray_not) { printf("N NOT\n"); }
-N(n_ray_and) { printf("N AND\n"); }
+N(n_ray_and) { printf("N AND %lu\n", a); if(a) tick(X); }
 N(n_ray_oor) { printf("N OOR\n"); }
 
 
 N(tick) {
+  //printf("tick\n");
   p_t*o_; Q_t a_;
   o_ = o; o = m; m = o_;
-  a_ = a; a = v; v = a_;
+  a_ = a; a = v; v = a_ - 1;
 
   p_t*s_; Q_t t_;
   s_ = s; s = n; n = s_;
   t_ = t; t = b; b = t_;
-
   O;
 }
-N(iam) { A(one, tick, and) B(two) O; }
 
-N(S) { //A("b", term) A(S, "b", term) B(1) C(1);
+N(iam) {
+  A(one) O;
 }
+
+// S = S a | b
+N(term) {
+
+}
+
+N(S) {
+  //A("b", term) A(S, "b", term) B(1) C(1);
+}
+
 N(back) { A(1) C(1); }
 N(example ) { A(iam) O; }
 
