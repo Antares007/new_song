@@ -41,15 +41,29 @@ N(iam) {
 
 // S = S a | b
 N(term) {
+  R(const char*, str);
+  R(Q_t, pos);
+  R(Q_t, len);
+  R(const char*, input);
+  if (pos<len && input[pos] == str[0]) {
+    
+  } else {
 
+  }
 }
-
+// tik tok
 N(S) {
-  //A("b", term) A(S, "b", term) B(1) C(1);
+  A(   "b", term)
+  B(S, "b", term, and2) O;
+}
+N(sore) {
+  A("s", term, "a", term, and2)
+  B("a", term, "s", term, and2) O;
 }
 
-N(back) { A(1) C(1); }
-N(example ) { A(iam) O; }
+N(back   ) { A(1) C(1); }
+N(example0) { A("ssss", 5, 0, sore) O; }
+N(example) { A(iam) O; }
 
 // clang-format off
 int main( ) {
