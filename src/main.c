@@ -42,19 +42,22 @@ N(term) { Log;
   else
     A(input, len, pos + 0) C(0);
 }
-N(S) {
-  A("b", term)
-  B(S, "b", term, and2) O;
-}
+N(a_term) { A("a", term) O; }
+N(b_term) { A("b", term) O; }
+N(c_term) { A("c", term) O; }
+N(or) {}
+N(prn) {}
+N(S);
+N(S2    ) { A(S, a_term, and, tok, or) B(prn)         O; }
+N(S     ) { A(b_term, tok, or)         B(S2, tok, or) O; }
+
 N(orelse) { Log; OM; C(1); }
 N(sore  ) {
   Log;
-  A(
-              "o", term,       "a", term, and2,
-      orelse, "a", term, and2, "o", term, and2,
-      orelse, "b", term, and2, "o", term, and2
-  )
-  O;
+  A(a_term, b_term, or,
+            c_term, or,
+               tok, and)
+  B(sore, tok, and) O;
 }
 
 N(back    ) { A(1   )              C(1); }
