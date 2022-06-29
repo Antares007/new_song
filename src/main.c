@@ -10,23 +10,24 @@ N(and2) { A(020) nar(X); }
 N(and3) { A(030) nar(X); }
 N(and4) { A(040) nar(X); }
 
-N(two);
-N(one) { Log; A(1) B(two) C(1); }
-N(two) { Log; A(2) B(one) C(1); }
-N(add) { Log; R(Q_t, r); R(Q_t, l); o[a++].Q = l + r, C(1); }
-
 #define OM p_t *o_; o_ = o, o = m, m = o_; \
            Q_t  a_; a_ = a, a = v, v = a_
 #define SN p_t *s_; s_ = s, s = n, n = s_; \
            Q_t  t_; t_ = t, t = b, b = t_
 
-N(tok       ) { Log; OM; SN; v--,O;   }
-N(o_ray_not ) { Log;                  }
-N(o_ray_and ) { Log; if (v) tok(X);   }
-N(o_ray_oor ) { Log;                  }
-N(n_ray_not ) { Log;                  }
-N(n_ray_and ) { Log; if (a) tok(X);   }
-N(n_ray_oor ) { Log;                  }
+N(tok       ) { Log; OM; SN; O;   }
+
+N(two);
+N(one) { Log; A(tok) B(two) O; }
+N(two) { Log; A(tok) B(one) O; }
+N(add) { Log; R(Q_t, r); R(Q_t, l); o[a++].Q = l + r, C(1); }
+
+N(o_ray_not ) { Log; }
+N(o_ray_and ) { Log; }
+N(o_ray_oor ) { Log; }
+N(n_ray_not ) { Log; }
+N(n_ray_and ) { Log; }
+N(n_ray_oor ) { Log; }
 
 N(iam       ) { A(one) O; }
 
@@ -49,16 +50,16 @@ N(orelse) { Log; OM; C(1); }
 N(sore  ) {
   Log;
   A(
-              "s", term,       "a", term, and2,
-      orelse, "a", term, and2, "s", term, and2,
+              "o", term,       "a", term, and2,
+      orelse, "a", term, and2, "o", term, and2,
       orelse, "b", term, and2, "o", term, and2
   )
   O;
 }
 
 N(back    ) { A(1   )              C(1); }
-N(example ) { A(sore) B("ssss", 5, 0) O; }
-N(example0) { A(iam )                 O; }
+N(example0) { A(sore) B("oooo", 5, 0) O; }
+N(example ) { A(iam )         O; }
 
 // clang-format off
 int main( ) {
