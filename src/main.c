@@ -31,6 +31,23 @@ N(n_ray_oor ) { Log; }
 
 N(iam       ) { A(one) O; }
 
+N(o_text    ) { o[1].c(X); }
+N(o_element ) { o[0].c(X); }
+N(counter   );
+N(button    ) {
+  R(const char*, l);
+  R(Q_t, d);
+  A(l, o_text) O;
+  if (d) A(d - 1, counter) O;
+}
+N(counter   ) {
+  R(Q_t, d);
+  A("button", button, o_element) B(d, "+") O;
+  A("button", button, o_element) B(d, "-") O;
+  A("0", o_text) O;
+}
+
+
 // S = S a | b
 N(term) { Log;
   R(const char *, str);
