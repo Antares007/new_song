@@ -5,6 +5,7 @@
   printf("oa%02lu mv%02lu st%03lu nb%03lu %s\n", a, v, t, b, __FUNCTION__)
 
 N(nar);
+N(dot) { O; }
 N(and) { A(010) nar(X); }
 N(and2) { A(020) nar(X); }
 N(and3) { A(030) nar(X); }
@@ -42,9 +43,22 @@ N(button    ) {
 }
 N(counter   ) {
   R(Q_t, d);
-  A("button", button, o_element) B(d, "+") O;
-  A("button", button, o_element) B(d, "-") O;
-  A("0", o_text) O;
+  A("button", button, o_element)  B(d, "+")   O;
+  A("button", button, o_element)  B(d, "-")   O;
+  A("0",              o_text)                 O;
+}
+N(counter2  ) {
+  R(Q_t, d);
+  A("button", button, o_element)  B(d, "+")   O;
+  A("button", button, o_element)  B(d, "-")   O;
+  A("0",              o_text)                 O;
+}
+N(draw_bark) {
+  R(n_t, nar);
+  A(nar) O;
+}
+N(counter_show) {
+  A(counter, draw_bark, dot, and) O;
 }
 
 
