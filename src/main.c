@@ -4,9 +4,9 @@
 #define Log                                                                    \
   printf("oa%02lu mv%02lu st%03lu nb%03lu %s\n", a, v, t, b, __FUNCTION__)
 
-N(nar);
-N(dot) { O; }
-N(and) { A(010) nar(X); }
+N(nar );
+N(dot ) { O; }
+N(and ) { A(010) nar(X); }
 N(and2) { A(020) nar(X); }
 N(and3) { A(030) nar(X); }
 N(and4) { A(040) nar(X); }
@@ -32,37 +32,6 @@ N(n_ray_oor ) { Log; }
 
 N(iam       ) { A(one) O; }
 
-N(o_text    ) { o[1].c(X); }
-N(o_element ) { o[0].c(X); }
-N(counter   );
-N(button    ) {
-  R(const char*, l);
-  R(Q_t, d);
-  A(l, o_text) O;
-  if (d) A(d - 1, counter) O;
-}
-N(counter   ) {
-  R(Q_t, d);
-  A("button", button, o_element)  B(d, "+")   O;
-  A("button", button, o_element)  B(d, "-")   O;
-  A("0",              o_text)                 O;
-}
-N(counter2  ) {
-  R(Q_t, d);
-  A("button", button, o_element)  B(d, "+")   O;
-  A("button", button, o_element)  B(d, "-")   O;
-  A("0",              o_text)                 O;
-}
-N(draw_bark) {
-  R(n_t, nar);
-  A(nar) O;
-}
-N(counter_show) {
-  A(counter, draw_bark, dot, and) O;
-}
-
-
-// S = S a | b
 N(term) { Log;
   R(const char *, str);
   R(Q_t, pos);
@@ -78,21 +47,10 @@ N(b_term) { A("b", term) O; }
 N(c_term) { A("c", term) O; }
 N(or) {}
 N(prn) {}
-N(S);
-N(S2    ) { A(S, a_term, and, tok, or) B(prn)         O; }
-N(S     ) { A(b_term, tok, or)         B(S2, tok, or) O; }
 
 N(orelse) { Log; OM; C(1); }
-N(sore  ) {
-  Log;
-  A(a_term, b_term, or,
-            c_term, or,
-               tok, and)
-  B(sore, tok, and) O;
-}
 
 N(back    ) { A(1   )              C(1); }
-N(example0) { A(sore) B("oooo", 5, 0) O; }
 N(example ) { A(iam )         O; }
 
 // clang-format off
