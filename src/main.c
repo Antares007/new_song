@@ -26,13 +26,10 @@ N(add) { Log; R(Q_t, r); R(Q_t, l); o[a++].Q = l + r, C(1); }
 N(o_ray_not ) { Log; }
 N(o_ray_and ) { Log; }
 N(o_ray_oor ) { Log; }
-N(n_ray_not ) { Log; }
-N(n_ray_and ) { Log; }
-N(n_ray_oor ) { Log; }
 
 N(iam       ) { A(one) O; }
 
-N(term) { Log;
+N(term    ) { Log;
   R(const char *, str);
   R(Q_t, pos);
   R(Q_t, len);
@@ -42,16 +39,32 @@ N(term) { Log;
   else
     A(input, len, pos + 0) C(0);
 }
-N(a_term) { A("a", term) O; }
-N(b_term) { A("b", term) O; }
-N(c_term) { A("c", term) O; }
-N(or) {}
-N(prn) {}
 
-N(orelse) { Log; OM; C(1); }
 
-N(back    ) { A(1   )              C(1); }
+N(bT      ) { A("b", term) O; }
+N(aT      ) { A("a", term) O; }
+N(xT      ) { A("x", term) O; }
+
+N(cT      ) { A("c", term) O; }
+
+N(thenS   ) {}
+N(orelse3 ) {}
+N(variable) {}
+
+N(Ba      ) {
+  A(bT,
+    Ba, aT, thenS, orelse3,
+    Ba, variable) O;
+}
+N(Bax     ) {
+  A(Ba, xT, thenS, Bax, variable) O;
+}
+
 N(example ) { A(iam )         O; }
+
+N(nar_and);
+N(nar_not);
+N(nar_oor);
 
 // clang-format off
 int main( ) {
@@ -60,9 +73,11 @@ int main( ) {
   p_t m[512]; Q_t v = 0;
   p_t n[512]; Q_t b = sizeof(n) / sizeof(*n);
 
-  s[--t].c = o_ray_not, s[--t].c = o_ray_and, s[--t].c = o_ray_oor;
-  n[--b].c = n_ray_not, n[--b].c = n_ray_and, n[--b].c = n_ray_oor;
+  s[--t].c = o_ray_oor;
+  s[--t].c = o_ray_and;
+  s[--t].c = o_ray_not;
+  s[--t].Q = 0111;
 
-  A(example) O;
+  A(nar_and) O;
   return 0;
 }
