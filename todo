@@ -1,5 +1,14 @@
-what is the problem?
-why is worth solving?
-how did u solve it?
-what alternatives did u have?
-what evidence did u have that it actualy works?
+What is the problem?
+We don't have a universal communication protocol.
+
+Why is it worth solving?
+It will simplify communication and save electricity around the world.
+
+How did you solve it?
+we need to use aradani
+
+What alternatives did you have?
+http/json API's
+
+What evidence did you have that it works?
+Reference implementation.
