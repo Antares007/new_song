@@ -1,14 +1,22 @@
 What is the problem?
-We don't have a universal communication protocol.
+Parsing text from left to right char by char to identify stuctured costructs is not a trivial task.
+Parsing from right to left is a simpler task because we already have seen the whole sentence.
+Communication in distributed systems is defined as message passing.
+HTTP is a too complex protocol. Parsing HTTP incrementally is not a trivial thing and this overhead job requires electricity and makes unnecessary heat (global warming).
+We don't use a universal communication protocol which is the word.
 
 Why is it worth solving?
-It will simplify communication and save electricity around the world.
+It will simplify, speed up communication and save electricity around the world.
 
 How did you solve it?
-we need to use aradani
+we need to open our eyes to the protocol which already exists, "In the beginning was the Word, and the Word was with God, and the Word was God"
+whole our reality we can describe by words and sentences.
 
 What alternatives did you have?
-http/json API's
+HTTP/JSON API's accidental complexity.
 
 What evidence did you have that it works?
 Reference implementation.
+
+quotes:
+There are only two hard things in Computer Science: cache invalidation and naming things.
